@@ -1,30 +1,303 @@
-# RockEncantech
+RockEncantech Store
 
-E-commerce catalog challenge with Laravel backend and React frontend.
+RockEncantech Store is a full-stack e-commerce catalog application built as a technical challenge.
+It includes a Laravel backend API and a React frontend, fully containerized with Docker.
 
-## Current status
-- Backend API completed
-- Frontend in progress
+🚀 Features
 
-## Backend stack
-- Laravel
-- MySQL
-- Laravel Sanctum
-- Service + Repository pattern
+Backend (Laravel)
 
-## Implemented endpoints
-- GET /api/products
-- GET /api/products/{id}
-- GET /api/categories
-- POST /api/register
-- POST /api/login
-- Protected product create/update/delete
+User registration and login
 
-## Run backend locally
-```bash
+Token-based authentication with Laravel Sanctum
+
+Product listing with pagination
+
+Product search (name & description)
+
+Category filtering
+
+Product details endpoint
+
+Protected CRUD operations
+
+Categories endpoint
+
+Validation (unique email, strong password)
+
+Service Layer + Repository Pattern
+
+API Resources for standardized responses
+
+Frontend (React)
+
+Product listing page
+
+Product cards (name, description, price, image, category)
+
+Search functionality
+
+Category filter
+
+Pagination
+
+Product details page
+
+Login and Register pages
+
+Token stored in localStorage
+
+Authenticated API requests using Axios
+
+Navigation with React Router
+
+UI built with Material UI
+
+🏗️ Project Structure
+
+RockEncantech/
+├── backend/
+│ ├── app/
+│ ├── routes/
+│ ├── database/
+│ ├── Dockerfile
+│ └── docker-entrypoint.sh
+│
+├── frontend/
+│ ├── src/
+│ │ ├── api/
+│ │ ├── components/
+│ │ ├── pages/
+│ │ ├── types/
+│ │ ├── App.tsx
+│ │ └── main.tsx
+│ └── Dockerfile
+│
+├── docker-compose.yml
+└── README.md
+
+🐳 Running the Project (Docker - Recommended)
+
+Requirements
+
+Docker Desktop (Windows/Mac) or Docker Engine (Linux)
+
+WSL enabled (Windows users only)
+
+Run the application
+
+docker compose up --build
+
+🌐 Access
+
+Frontend:
+http://localhost:5173
+
+Backend:
+http://localhost:8000
+
+⚙️ What happens automatically
+
+MySQL container starts
+
+Backend waits for the database to be ready
+
+.env is created if missing
+
+Laravel APP_KEY is generated
+
+Database migrations are executed
+
+Seed data is inserted
+
+Backend API starts
+
+Frontend application starts
+
+💻 Running Without Docker
+
+Requirements
+
+PHP 8.2+
+
+Composer
+
+Node.js 18+
+
+MySQL
+
+Backend
+
 cd backend
+
 composer install
+
 cp .env.example .env
+
 php artisan key:generate
-php artisan migrate:fresh --seed
+
+Configure database in .env
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=rockencantech
+DB_USERNAME=root
+DB_PASSWORD=your_password
+
+Run migrations and seed
+
+php artisan migrate --seed
+
+Start backend
+
 php artisan serve
+
+Backend URL:
+http://127.0.0.1:8000
+
+Frontend
+
+cd frontend
+
+npm install
+
+npm run dev
+
+Frontend URL:
+http://localhost:5173
+
+🐧 Running on Linux (Ubuntu)
+
+Install dependencies
+
+sudo apt update
+
+PHP + extensions
+
+sudo apt install php php-cli php-mbstring php-xml php-mysql unzip curl
+
+Composer
+
+curl -sS https://getcomposer.org/installer
+ | php
+sudo mv composer.phar /usr/local/bin/composer
+
+Node.js via NVM
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh
+ | bash
+
+(restart terminal)
+
+nvm install 20
+nvm use 20
+
+MySQL
+
+sudo apt install mysql-server
+
+Configure MySQL
+
+sudo mysql
+
+CREATE DATABASE rockencantech;
+
+Run project
+
+Follow the steps from:
+Running Without Docker
+
+🔐 Authentication
+
+The application uses Laravel Sanctum.
+
+After login or registration:
+
+Token is stored in localStorage
+
+Requests include:
+
+Authorization: Bearer {token}
+
+📡 API Endpoints
+
+Public Routes
+
+GET /api/products
+
+GET /api/products/{id}
+
+GET /api/categories
+
+GET /api/products?category={id}
+
+GET /api/products?search={query}
+
+POST /api/register
+
+POST /api/login
+
+Protected Routes
+
+POST /api/products
+
+PUT /api/products/{id}
+
+DELETE /api/products/{id}
+
+🧠 Architecture
+
+Backend
+
+Service Layer handles business logic
+
+Repository Pattern handles database operations
+
+Controllers remain clean and focused
+
+Resources and Collections standardize API responses
+
+Frontend
+
+Pages represent application screens
+
+Components are reusable UI elements
+
+API layer centralizes HTTP requests
+
+Types provide strong typing with TypeScript
+
+🧪 Seed Data
+
+The application includes seed data for testing:
+
+Categories:
+
+Electronics
+
+Books
+
+Home
+
+Clothing
+
+Products are automatically generated during migration.
+
+📌 Notes
+
+This project was built with focus on:
+
+Clean architecture
+
+Maintainability
+
+Scalability
+
+Real-world structure
+
+Good developer experience
+
+👨‍💻 Author
+
+Matheus Almeida dos Santos
