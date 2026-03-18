@@ -1,0 +1,30 @@
+# RockEncantech
+
+E-commerce catalog challenge with Laravel backend and React frontend.
+
+## Current status
+- Backend API completed
+- Frontend in progress
+
+## Backend stack
+- Laravel
+- MySQL
+- Laravel Sanctum
+- Service + Repository pattern
+
+## Implemented endpoints
+- GET /api/products
+- GET /api/products/{id}
+- GET /api/categories
+- POST /api/register
+- POST /api/login
+- Protected product create/update/delete
+
+## Run backend locally
+```bash
+cd backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate:fresh --seed
+php artisan serve
