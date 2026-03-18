@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\CategoryResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+use App\Http\Resources\CategoryCollection;
 use App\Services\CategoryService;
-use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
-class CategoryController extends Controller
+class CategoryController extends ResourceCollection
 {
     public function __construct(
         private CategoryService $categoryService
     ) {}
 
-    public function index(): AnonymousResourceCollection
+    public function index(): CategoryCollection
     {
         $categories = $this->categoryService->listCategories();
 
-        return CategoryResource::collection($categories);
+        return new CategoryCollection($categories);
     }
 }

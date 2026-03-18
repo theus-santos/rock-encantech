@@ -9,6 +9,10 @@ use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+=======
+use Illuminate\Validation\Rule;
+>>>>>>> bbcb863 (feat: implement backend API with auth and product catalog)
 
 class ProductController extends Controller
 {
@@ -43,7 +47,7 @@ class ProductController extends Controller
     public function store(Request $request): JsonResponse
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:products,name'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric', 'min:0'],
             'category_id' => ['required', 'exists:categories,id'],
@@ -59,10 +63,15 @@ class ProductController extends Controller
         ], 201);
     }
 
-    public function update(Request $request, Product $product): JsonResponse
+   public function update(Request $request, Product $product): JsonResponse
     {
         $data = $request->validate([
-            'name' => ['sometimes', 'string', 'max:255'],
+            'name' => [
+                'sometimes',
+                'string',
+                'max:255',
+                Rule::unique('products', 'name')->ignore($product->id),
+            ],
             'description' => ['sometimes', 'string'],
             'price' => ['sometimes', 'numeric', 'min:0'],
             'category_id' => ['sometimes', 'exists:categories,id'],
