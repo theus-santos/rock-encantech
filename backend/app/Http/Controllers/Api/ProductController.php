@@ -9,10 +9,7 @@ use App\Models\Product;
 use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-<<<<<<< HEAD
-=======
 use Illuminate\Validation\Rule;
->>>>>>> bbcb863 (feat: implement backend API with auth and product catalog)
 
 class ProductController extends Controller
 {
