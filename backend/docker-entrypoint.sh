@@ -9,16 +9,17 @@ until php -r "try { new PDO('mysql:host=db;port=3306;dbname=rockencantech', 'use
   sleep 3
 done
 
-# Criar .env se não existir
+if [ ! -d "vendor" ]; then
+  echo "📦 Installing composer dependencies..."
+  composer install
+fi
+
 if [ ! -f .env ]; then
   cp .env.example .env
 fi
 
-# Gerar key
 php artisan key:generate --force
 
-# Rodar migrations (sem apagar dados existentes)
 php artisan migrate --seed --force
 
-# Subir servidor
 php artisan serve --host=0.0.0.0 --port=8000
