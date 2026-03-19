@@ -77,6 +77,10 @@ GET /api/products
 
 GET /api/products/{id}
 
+POST /api/products/{id}
+
+DELETE /api/products/{id}
+
 GET /api/categories
 
 POST /api/register
