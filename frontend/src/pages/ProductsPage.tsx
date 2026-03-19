@@ -48,6 +48,19 @@ export default function ProductsPage() {
     }
   };
 
+  const handleDelete = async (id: number) => {
+    const confirmed = window.confirm("Are you sure you want to delete this product?");
+
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/products/${id}`);
+      fetchProducts();
+    } catch (error) {
+      console.error("Error deleting product", error);
+    }
+  };
+
   useEffect(() => {
     fetchCategories();
   }, []);
@@ -63,7 +76,15 @@ export default function ProductsPage() {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" sx={{ mb: 3 }}>
+      <Typography variant="h4" 
+          sx={{ 
+            mb: 3, 
+            justifyContent: "center", 
+            display: "flex", 
+            fontWeight: 600,
+            color: "#fff",
+          }}
+        >
         Products
       </Typography>
 
@@ -86,7 +107,22 @@ export default function ProductsPage() {
           />
         </Grid>
         <Grid size={{ xs: 12, md: 2 }}>
-          <Button fullWidth variant="contained" sx={{ height: "100%" }} onClick={handleSearch}>
+          <Button fullWidth variant="contained" sx={{
+              height: "100%",
+              color: "#fff",
+              backgroundColor: "#FFD600",
+              borderRadius: "999px",
+              fontSize: "16px",
+              fontWeight: 500,
+              px: 3,
+              py: 1,
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#000",
+                color: "#FFD600",
+              },
+            }}
+            onClick={handleSearch}>
             Search
           </Button>
         </Grid>
@@ -101,7 +137,7 @@ export default function ProductsPage() {
           <Grid container spacing={3}>
             {products.map((product) => (
               <Grid key={product.id} size={{ xs: 12, sm: 6, md: 4 }}>
-              <ProductCard product={product} />
+              <ProductCard product={product} onDelete={handleDelete} />
               </Grid>
             ))}
           </Grid>

@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { Alert, Box, Button, Container, TextField, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { useNavigate, Link } from "react-router-dom";
 import api from "../api/axios";
 import type { AuthResponse } from "../types/auth";
 
@@ -22,33 +29,117 @@ export default function LoginPage() {
     }
   };
 
+  const inputStyle = {
+    "& .MuiOutlinedInput-root": {
+      backgroundColor: "#fff",
+      borderRadius: "10px",
+      color: "#000",
+
+      "& fieldset": {
+        borderColor: "#000",
+      },
+
+      "&:hover fieldset": {
+        borderColor: "#000",
+      },
+
+      "&.Mui-focused fieldset": {
+        borderColor: "#000",
+        borderWidth: "2px",
+      },
+    },
+  };
+
   return (
-    <Container maxWidth="sm" sx={{ mt: 6 }}>
-      <Typography variant="h4" sx={{ mb: 3 }}>
-        Login
-      </Typography>
-
-      {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-
-      <Box component="form" onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Email"
-          margin="normal"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          type="password"
-          margin="normal"
-          value={form.password}
-          onChange={(e) => setForm({ ...form, password: e.target.value })}
-        />
-        <Button type="submit" variant="contained" fullWidth sx={{ mt: 2 }}>
+    <Container maxWidth="xs" sx={{ mt: 10 }}>
+      <Box
+        sx={{
+          backgroundColor: "#1E1E1E",
+          p: 4,
+          borderRadius: 3,
+          boxShadow: 4,
+        }}
+      >
+        <Typography
+          variant="h5"
+          sx={{ mb: 3, color: "#fff", fontWeight: 600, textAlign: "center" }}
+        >
           Login
-        </Button>
+        </Typography>
+
+        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+
+        <Box component="form" onSubmit={handleSubmit}>
+          
+          <Box sx={{ mb: 2 }}>
+            <Typography sx={{ color: "#fff", mb: 0.5 }}>
+              Email
+            </Typography>
+            <TextField
+              fullWidth
+              value={form.email}
+              sx={inputStyle}
+              onChange={(e) =>
+                setForm({ ...form, email: e.target.value })
+              }
+            />
+          </Box>
+
+          <Box sx={{ mb: 2 }}>
+            <Typography sx={{ color: "#fff", mb: 0.5 }}>
+              Password
+            </Typography>
+            <TextField
+              fullWidth
+              type="password"
+              value={form.password}
+              sx={inputStyle}
+              onChange={(e) =>
+                setForm({ ...form, password: e.target.value })
+              }
+            />
+          </Box>
+
+          <Button
+            type="submit"
+            variant="contained"
+            fullWidth
+            sx={{
+              mt: 2,
+              backgroundColor: "#FFD600",
+              color: "#000",
+              fontWeight: 600,
+              textTransform: "none",
+              "&:hover": {
+                backgroundColor: "#e6c200",
+              },
+            }}
+          >
+            Login
+          </Button>
+        </Box>
+
+        <Typography
+          sx={{
+            mt: 2,
+            color: "#aaa",
+            textAlign: "center",
+            fontSize: "14px",
+          }}
+        >
+          Don't have an account?{" "}
+          <Box
+            component={Link}
+            to="/register"
+            sx={{
+              color: "#FFD600",
+              textDecoration: "none",
+              fontWeight: 500,
+            }}
+          >
+            Register
+          </Box>
+        </Typography>
       </Box>
     </Container>
   );
